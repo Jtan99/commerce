@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { Products, Navbar } from "./components";
-import { commerce } from './lib/commerce';
+import { Products, Navbar } from "components";
+import { commerce } from 'lib/commerce';
 
 const App = () => {
   return (
