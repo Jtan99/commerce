@@ -24,6 +24,12 @@ export default makeStyles((theme) => ({
     fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
     fontWeight: 500,
   },
+  link : {
+    color: 'inherit',
+    'text-decoration': 'inherit',
+    display: 'flex',
+    'align-items': 'center',
+  },
   image: {
     marginRight: '10px',
     height: '25px',

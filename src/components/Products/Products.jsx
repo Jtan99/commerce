@@ -4,7 +4,7 @@ import Product from './Product/Product';
 import useStyles from './productsStyles';
 import { commerce } from 'lib/commerce';
 
-const Products = () => {
+const Products = ({ onAddToCart }) => {
   const[products, setProducts] = useState([]);
   useEffect( () => {
     fetchProducts();
@@ -23,7 +23,7 @@ const Products = () => {
       <div className={classes.gridStyles}>
         {products.map( (p) => (
           <div key={p.id} className='item'>
-            <Product product={p} />
+            <Product product={p} onAddToCart={onAddToCart} />
           </div>
         ))}
       </div>
