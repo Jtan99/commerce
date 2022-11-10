@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 
-function App() {
+import { Products, Navbar, Cart } from 'components';
+import { commerce } from 'lib/commerce';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+
+const App = () => {
+  const [cart, setCart] = useState({});
+  const fetchCart = async () => {
+    const cart = await commerce.cart.retrieve();
+    setCart(cart)
+  }
+
+  useEffect( () => {
+    fetchCart();
+  }, []);
+
+  const handleAddToCart = async (productId, quantity) => {
+    setCart(await commerce.cart.add(productId, quantity));
+  }
+
+  console.log(cart);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div className='app'>
+        <Navbar totalItems={cart.total_items} />
+        <Routes>
+          <Route path='/' element={
+            <Products onAddToCart = {handleAddToCart} />
+          } />
+          <Route path='/cart' element={
+            <Cart cart={cart} />
+          } />
+        </Routes>
+      </div>
+    </Router>
+  )
 }
 
 export default App;
