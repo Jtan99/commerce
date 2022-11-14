@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import { AppBar, Toolbar, IconButton, Badge} from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
 import { Link, useLocation } from 'react-router-dom';
+import { CartContext } from 'contexts/CartContext';
 
-import logo from '../../assets/commerce.jpg'
+import logo from 'assets/commerce.jpg'
 import useStyles from './navbarStyles'
 
-const Navbar = ({ totalItems }) => {
+const Navbar = () => {
   const classes = useStyles();
+  const { cart }= useContext(CartContext);
   const location = useLocation();
 
   return (
@@ -23,7 +25,7 @@ const Navbar = ({ totalItems }) => {
         {location.pathname === '/' && (
           <div className={classes.button}>
             <IconButton component={Link} to="/cart" aria-label="Show cart items">
-              <Badge badgeContent={totalItems} color="secondary">
+              <Badge badgeContent={cart.total_items} color="secondary">
                 <ShoppingCart />
               </Badge>
             </IconButton>

@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react';
 
 import Product from './Product/Product';
 import useStyles from './productsStyles';
-import { commerce } from 'lib/commerce';
+import { fetchProductsFromCommerce } from 'lib/commerce';
 
-const Products = ({ onAddToCart }) => {
+const Products = () => {
   const[products, setProducts] = useState([]);
+
   useEffect( () => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
+    const { data } = await fetchProductsFromCommerce();
     setProducts(data);
   }
 
@@ -23,7 +24,7 @@ const Products = ({ onAddToCart }) => {
       <div className={classes.gridStyles}>
         {products.map( (p) => (
           <div key={p.id} className='item'>
-            <Product product={p} onAddToCart={onAddToCart} />
+            <Product product={p} />
           </div>
         ))}
       </div>
