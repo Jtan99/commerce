@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Card, CardMedia, CardContent, CardActions, IconButton} from '@material-ui/core';
 import { AddShoppingCart} from '@material-ui/icons';
+import { CartContext } from 'contexts/CartContext';
+import { addProductToCommerceCart } from 'lib/commerce';
 
 import useStyles from './productStyles';
 
-const Product = ({ product, onAddToCart}) => {
+const Product = ({ product }) => {
+  const {setCart} = useContext(CartContext);
+
+  const addProductToCart = async (productId, quantity) => {
+    setCart(await addProductToCommerceCart(productId, quantity));
+  };
+
   const classes = useStyles();
 
   return (
@@ -18,7 +26,7 @@ const Product = ({ product, onAddToCart}) => {
         <p className={classes.cardDescription}>{product.description.replace(/<\/?[^>]+(>|$)/g, "")}</p>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton aria-label='Add to Cart' onClick={ () => { onAddToCart(product.id, 1) }}>
+        <IconButton aria-label='Add to Cart' onClick={ () => {addProductToCart(product.id, 1)}}>
           <AddShoppingCart />
         </IconButton>
       </CardActions>
