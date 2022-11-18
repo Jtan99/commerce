@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 
-import { Products, Navbar, Cart } from 'components';
+import { Products, Navbar, Cart, Checkout } from 'components';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { CartContext } from 'contexts/CartContext';
 import { fetchCartFromCommerce} from 'lib/commerce';
@@ -27,6 +27,9 @@ const App = () => {
           } />
           <Route path='/cart' element={
             <Cart/>
+          } />
+          <Route path='/checkout' element={
+            <Checkout />
           } />
         </Routes>
         </CartContext.Provider>
