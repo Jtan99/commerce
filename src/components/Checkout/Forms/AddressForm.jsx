@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { InputLabel, Select, MenuItem, Button, Typography } from '@material-ui/core';
 import { useForm, FormProvider } from 'react-hook-form';
 
@@ -6,13 +7,13 @@ import useStyles from './formStyles';
 import FormInput from './CustomTextField';
 import { fetchShippingCountriesFromCommerce, fetchCountrySubdivisionsFromCommerce, fetchShippingOptionsFromCommerce } from "lib/commerce"
 
-function AddressForm({ checkoutToken }) {
+function AddressForm({ checkoutToken, next }) {
   const [shippingCountries, setShippingCountries] = useState([]);
-  const [shippingCountry, setShippingCountry] = useState([]);
+  const [shippingCountry, setShippingCountry] = useState("");
   const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
-  const [shippingSubdivision, setShippingSubdivision] = useState([]);
+  const [shippingSubdivision, setShippingSubdivision] = useState("");
   const [shippingOptions, setShippingOptions] = useState([]);
-  const [shippingOption, setShippingOption] = useState([]);
+  const [shippingOption, setShippingOption] = useState("");
   const methods = useForm();
   const classes = useStyles();
 
@@ -30,7 +31,7 @@ function AddressForm({ checkoutToken }) {
 
       setShippingSubdivisions(Object.entries(subdivisions));
     }
-    if(shippingCountry.length > 0) fetchShippingSubdivisions(shippingCountry);
+    if(shippingCountry) fetchShippingSubdivisions(shippingCountry);
   }, [shippingCountry]);
 
   useEffect(() => {
@@ -38,14 +39,21 @@ function AddressForm({ checkoutToken }) {
       const options = await fetchShippingOptionsFromCommerce(checkoutTokenId, country, region);
       setShippingOptions(options);
     }
-    if(shippingSubdivision.length > 0) fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision);
+    if(shippingSubdivision) fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision);
   }, [shippingSubdivision]);
 
   return (
     <div>
       <Typography variant="h6" gutterBottom>Shipping Address</Typography>
       <FormProvider {...methods}>
-          <form onSubmit="">
+          <form onSubmit={methods.handleSubmit( (data) => 
+            next({
+              ...data,
+              shippingCountry,
+              shippingSubdivision,
+              shippingOption
+            })
+          )}>
             <div className={classes.gridContainer}>
               <FormInput required name="firstName" label="First name" />
               <FormInput required name="lastName" label="Last name" />
@@ -57,7 +65,7 @@ function AddressForm({ checkoutToken }) {
             <div className={classes.gridContainer}>
               <div>
                 <InputLabel className={classes.dropDownLabel}>Shipping Country</InputLabel>
-                <Select value={shippingCountry} fullWidth onChange={(e) => setShippingCountry(e.target.value)}>
+                <Select defaultValue="" value={shippingCountry} fullWidth onChange={(e) => setShippingCountry(e.target.value)}>
                   {shippingCountries.map(([code, country]) => (
                   <MenuItem key={code} value={code}>
                     {country}
@@ -67,7 +75,7 @@ function AddressForm({ checkoutToken }) {
               </div>
               <div>
                 <InputLabel className={classes.dropDownLabel}>Shipping Subdivisions</InputLabel>
-                <Select value={shippingSubdivision} fullWidth onChange={(e) => setShippingSubdivision(e.target.value)}>
+                <Select defaultValue="" value={shippingSubdivision} fullWidth onChange={(e) => setShippingSubdivision(e.target.value)}>
                   {shippingSubdivisions.map(([code, subdivision]) => (
                     <MenuItem key={code} value={code}>
                       {subdivision}
@@ -87,6 +95,10 @@ function AddressForm({ checkoutToken }) {
                 ))}
                 </Select>
               </div>
+            </div><br/>
+            <div className={classes.centerContainer}>
+              <Button component={Link} to="/cart" variant="outlined">Back to Cart</Button>
+              <Button type="submit" variant="contained" color="primary">Next</Button>
             </div>
           </form>
       </FormProvider>

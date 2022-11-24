@@ -23,9 +23,12 @@ const dropProductFromCommerceCart = (productId) =>{
 }
 
 const clearCommerceCart = () =>{
-  return commerce.cart.empty()
+  return commerce.cart.empty();
 }
 
+const refreshCommerceCart = () =>{
+  return commerce.cart.refresh();
+}
 const fetchCheckoutToken = ({ cart }) => {
   return commerce.checkout.generateToken(cart.id, {type: 'cart'});
 }
@@ -42,6 +45,10 @@ const fetchShippingOptionsFromCommerce = (checkoutTokenId, country, region) => {
   return commerce.checkout.getShippingOptions(checkoutTokenId, { country, region });
 }
 
+const sendCheckoutRequest = (checkoutTokenId, order) => {
+  return commerce.checkout.capture(checkoutTokenId, order);
+}
+
 export {
   fetchProductsFromCommerce,
   fetchCartFromCommerce,
@@ -49,8 +56,10 @@ export {
   updateProductQtyInCommerceCart,
   dropProductFromCommerceCart,
   clearCommerceCart,
+  refreshCommerceCart,
   fetchCheckoutToken,
   fetchShippingCountriesFromCommerce,
   fetchCountrySubdivisionsFromCommerce,
   fetchShippingOptionsFromCommerce,
+  sendCheckoutRequest,
 };

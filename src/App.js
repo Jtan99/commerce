@@ -7,7 +7,6 @@ import { fetchCartFromCommerce} from 'lib/commerce';
 
 const App = () => {
   const [cart, setCart] = useState({});
-
   const fetchCommerceCart = async () => {
     setCart(await fetchCartFromCommerce());
   };

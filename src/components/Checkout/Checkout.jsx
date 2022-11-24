@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button} from '@material-ui/core'
+import { Stepper, Step, StepLabel, Typography} from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 
 import useStyles from './checkoutStyles';
 import AddressForm from './Forms/AddressForm';
@@ -14,6 +15,10 @@ const Checkout = () => {
   const cart = useContext(CartContext);
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setChekoutToken] = useState(null);
+  const [shippingData, setShippingData] = useState({});
+  const [order, setOrder] = useState({});
+
+  const navigate = useNavigate();
   const classes = useStyles();
 
   useEffect(() => {
@@ -22,21 +27,29 @@ const Checkout = () => {
         const token = await fetchCheckoutToken(cart);
         setChekoutToken(token);
       } catch (error) {
-        console.log("token error");
+        if (activeStep != steps.length) {
+          navigate("/");
+        }
       }
     }
     generateToken();
-  }, []);
+  }, [cart]);
 
+  const nextStep = () => setActiveStep(activeStep + 1);
+  const backStep = () => setActiveStep(activeStep - 1);
+  const next = (data) => {
+    setShippingData(data);
+    nextStep();
+  }
 
 const displayForm = () => {
   switch(activeStep) {
     case 0:
-      return <AddressForm checkoutToken={checkoutToken} />;
+      return <AddressForm checkoutToken={checkoutToken} next={next} />;
     case 1:
-      return <PaymentForm />;
+      return <PaymentForm checkoutToken={checkoutToken} nextStep={nextStep} backStep={backStep} shippingData={shippingData} setOrder={setOrder}/>;
     default:
-      return <ConfirmationForm />;
+      return <ConfirmationForm order={order} />;
   }
 }
 

@@ -8,5 +8,17 @@ export default makeStyles((theme) => ({
   },
   dropDownLabel: {
     margin: "15px 0 5px",
-  }
+  },
+  centerContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  divider: {
+    margin: '20px 0',
+  },
+  spinner: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 }));
