@@ -23,7 +23,30 @@ const dropProductFromCommerceCart = (productId) =>{
 }
 
 const clearCommerceCart = () =>{
-  return commerce.cart.empty()
+  return commerce.cart.empty();
+}
+
+const refreshCommerceCart = () =>{
+  return commerce.cart.refresh();
+}
+const fetchCheckoutToken = ({ cart }) => {
+  return commerce.checkout.generateToken(cart.id, {type: 'cart'});
+}
+
+const fetchShippingCountriesFromCommerce = (checkoutTokenId) => {
+  return commerce.services.localeListShippingCountries(checkoutTokenId);
+}
+
+const fetchCountrySubdivisionsFromCommerce = (countryCode) => {
+  return commerce.services.localeListSubdivisions(countryCode);
+}
+
+const fetchShippingOptionsFromCommerce = (checkoutTokenId, country, region) => {
+  return commerce.checkout.getShippingOptions(checkoutTokenId, { country, region });
+}
+
+const sendCheckoutRequest = (checkoutTokenId, order) => {
+  return commerce.checkout.capture(checkoutTokenId, order);
 }
 
 export {
@@ -32,5 +55,11 @@ export {
   addProductToCommerceCart,
   updateProductQtyInCommerceCart,
   dropProductFromCommerceCart,
-  clearCommerceCart
+  clearCommerceCart,
+  refreshCommerceCart,
+  fetchCheckoutToken,
+  fetchShippingCountriesFromCommerce,
+  fetchCountrySubdivisionsFromCommerce,
+  fetchShippingOptionsFromCommerce,
+  sendCheckoutRequest,
 };
