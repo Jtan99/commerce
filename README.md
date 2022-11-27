@@ -1,70 +1,63 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Ecommerce Site
 
-## Available Scripts
+Table of Contents
+1. [Introduction](##Introduction)
+2. [Project Features and Screen Shots](Project-Features-and-Screen-Shots)
+3. [Installation and Setup Instructions](##Setup-Local-Development-Environment)
+   - [Requirements](###Requirements)
+   - [First Time Installation](###First-Time-Installation)
+   - [Run App Locally](###Instructions-to-run-the-app-in-development-mode)
 
-In the project directory, you can run:
+## Introduction
 
-### `npm start`
+This is a personal project featuring an Ecommerce site that is both web and mobile friendly. A live demo is hosted on Netlify (https://e-comm-demo.netlify.app/).
 
-Runs the app in the development mode.\
+## Project Features and Screen Shots
+#### Products Catalogue :
+Application dynamically displays product details retrieved from commercejs API. The products are managed on commercejs's web interface.
+![](src/assets/browseCatalogueDemo.png) 
+
+#### Adding items to cart :
+Users can add an item to their cart by clicking on the add to cart icon below each item's description. The shopping cart icon on the top right corner displays the number of items in the user's cart and immediately updates itself when a new item is added to their cart. Items added to cart are retained, allowing users to leave site and resume previous sessions when they return.
+![](src/assets/addToCartDemo.png)
+
+#### Empty Cart Message :
+If the user's cart is empty, the cart page displays an empty cart message and a link that redirects the user back to items catalogues page.
+![](src/assets/emptyCartDemo.png)
+
+#### Modifying Filled Cart :
+The quantity and subtotal of each item in the user's cart is displayed. At the bottom left of the screen, total price is also displayed. The user can increment or decrement the quantity of items in their cart and all values are instantly updated.
+![](src/assets/modifyCartDemo.png)
+
+#### Shipping Information :
+The user must enter their shipping details before they can continue. User can use google autofill if they have devliery address saved to their google account.
+![](src/assets/shippingAddressDemo.png)
+
+#### Banking Information :
+User must fill their credentials to finish the checkout process. For testing purposes use the test credentials card as displayed in the screenshot. DO NOT use real credentials! System is set to not charge anything, nonetheless it is not advised and only proceed at your own risk.
+![](src/assets/paymentDemo.png)
+
+#### Confirmation
+Checkout was successfully processed and a confirmation message is displayed. User should receive an email with details regarding their purchase.
+![](src/assets/confirmationDemo.png)
+
+## Setup Local Development Environment
+### Requirements
+
+You will need node and npm installed globally on your machine.
+
+### First Time Installation
+Clone this repository either manually or using the git command   
+>`git clone "https://github.com/Jtan99/Ecommerce.git"`  
+
+Open a terminal inside src and enter the command  
+>`npm install`  
+
+### Instructions to run the app in development mode
+Enter the following command in a terminal opened in src
+>```npm start```  
+
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The page will reload when you make changes. You may also see any lint errors in the console.
