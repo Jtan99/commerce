@@ -2,12 +2,12 @@
 # Ecommerce Site
 
 Table of Contents
-1. [Introduction](##Introduction)
-2. [Project Features and Screen Shots](Project-Features-and-Screen-Shots)
-3. [Installation and Setup Instructions](##Setup-Local-Development-Environment)
-   - [Requirements](###Requirements)
-   - [First Time Installation](###First-Time-Installation)
-   - [Run App Locally](###Instructions-to-run-the-app-in-development-mode)
+- [Introduction](#Introduction)
+- [Project Features and Screen Shots](#Project-Features-and-Screen-Shots)
+- [Installation and Setup Instructions](#Setup-Local-Development-Environment)
+   - [Requirements](#Requirements)
+   - [First Time Installation](#First-Time-Installation)
+   - [Run App Locally](#Instructions-to-run-the-app-in-development-mode)
 
 ## Introduction
 
