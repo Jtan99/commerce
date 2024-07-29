@@ -49,7 +49,7 @@ You will need node and npm installed globally on your machine.
 
 ### First Time Installation
 Clone this repository either manually or using the git command   
->`git clone "https://github.com/Jtan99/Ecommerce.git"`  
+>`git clone "https://github.com/jtan-gh/Ecommerce.git"`  
 
 Open a terminal inside src and enter the command  
 >`npm install`  
